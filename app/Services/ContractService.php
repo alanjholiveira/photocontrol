@@ -67,7 +67,7 @@ class ContractService
 
             return response()->json([
                 'type' => 'success',
-                'message' => 'Client <b>' .$data['firstname'] .'</b> Update Success'
+                'message' => 'Contract <b>' .$course->code .'</b> Update Success'
             ],200);
 
 
@@ -78,30 +78,34 @@ class ContractService
 
     public function destroy($id)
     {
-        if(count($id) >= 1){
-            foreach($id as $ids){
-                $del = $this->repository->find($ids);
-//                if(!empty($del->profile->imagefile)) {
-//                    if (file_exists(public_path() . '/uploads/users/' . $del->profile->imagefile)) {
-//                        $this->storage->disk('local_public')->delete('users/' . $del->profile->imagefile);
-//                    }
-//                }
-                //$del->delete();
-            }
+        if( !empty($id) ) {
+            $del = $this->repository->find($id);
+
+            $del->delete();
+
             return response()->json([
                 'msgstatus' => 'success',
-                'msg' => 'Successfully deleted record.'
+                'message' => 'Successfully deleted record.'
             ], 200);
+
         } else {
             return response()->json([
                 'msg' => 'No records deleted.'
             ], 422);
         }
+
     }
 
-    public function generatePdf()
+    /**
+     * Create PDF
+     * @param $data
+     * @return mixed
+     */
+    public function generatePdf($data)
     {
-
+        $contract =  $this->repository->findWhere([ 'code' => $data ])->first();
+        $pdf = \PDF::loadHTML($contract->contract)->setPaper('a4', 'portrait');
+        return $pdf->stream();
     }
 
 

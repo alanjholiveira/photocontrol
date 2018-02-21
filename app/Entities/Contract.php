@@ -5,10 +5,11 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contract extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, SoftDeletes;
 
     protected $table = "tb_contracts";
 
@@ -18,6 +19,7 @@ class Contract extends Model implements Transformable
         'clientID', 'code', 'name', 'contract', 'filename', 'obs', 'status'
     ];
 
+    protected $dates = ['deleted_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

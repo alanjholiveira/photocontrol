@@ -86,13 +86,14 @@ class ContractController extends Controller
         return $this->service->update($request->all(), $contractID);
     }
 
+
     /**
-     * @param $code
+     * @param $contractID
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($code)
+    public function destroy($contractID)
     {
-        return $this->service->destroy($code);
+        return $this->service->destroy($contractID);
     }
 
 

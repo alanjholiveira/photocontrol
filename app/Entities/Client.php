@@ -5,10 +5,11 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, SoftDeletes;
 
     protected $table = "tb_clients";
 
@@ -21,6 +22,8 @@ class Client extends Model implements Transformable
     protected $hidden = [
         'password',
     ];
+
+    protected $dates = ['deleted_at'];
 
     /**
      * @return string

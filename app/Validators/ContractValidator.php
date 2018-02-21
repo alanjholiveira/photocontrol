@@ -10,21 +10,17 @@ class ContractValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'firstname'  => 'required',
-            'lastname'  => 'required',
-            'email'  => 'required|email|max:255',
-            'phonenumber'  => 'required',
-            'address1'  => 'required',
-            'city'  => 'required',
+            'clientID'  => 'required',
+            'name'  => 'required',
+            'value'  => 'required',
+            'contract'  => 'required',
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'firstname'  => 'required',
-            'lastname'  => 'required',
-            'email'  => 'required|email|max:255',
-            'phonenumber'  => 'required',
-            'address1'  => 'required',
-            'city'  => 'required',
+            'clientID'  => 'required',
+            'name'  => 'required',
+            'value'  => 'required',
+            'contract'  => 'required',
         ],
    ];
 }

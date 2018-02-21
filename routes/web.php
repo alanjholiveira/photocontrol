@@ -59,7 +59,9 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
         Route::get('/new', 'ContractController@create')->name('panel.contractNew');
         Route::post('/new', 'ContractController@store')->name('panel.contractStore');
         Route::get('/{contractID}', 'ContractController@edit')->name('panel.contractEdit');
-        Route::put('/new', 'ContractController@update')->name('panel.contractUpdate');
+        Route::put('/{contractID}', 'ContractController@update')->name('panel.contractUpdate');
+        Route::delete('/{contractID}/cancel', 'ContractController@destroy')->name('panel.contractCancel');
+        Route::get('/print/{code}', 'ContractController@generatePdf')->name('panel.contractPdf');
 
     });
 

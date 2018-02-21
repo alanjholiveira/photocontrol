@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 {!! Form::label('inputNote', 'Contract:') !!}
-                {!! Form::textarea('note', null, ['id' => 'editor', 'size' => '80x10', 'class' => 'form-control']) !!}
+                {!! Form::textarea('contract', null, ['id' => 'editor', 'size' => '80x10', 'class' => 'form-control']) !!}
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 {!! Form::label('inputObs', 'Obs:') !!}
-                {!! Form::textarea('obs', null, ['size' => '20x5', 'class' => 'form-control']) !!}
+                {!! Form::textarea('obs', null, ['size' => '20x2', 'class' => 'form-control']) !!}
             </div>
         </div>
     </div>

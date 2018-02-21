@@ -14,6 +14,8 @@ $proElement.click(function (e) {
     }
 });
 
+
+
 var ProAjaxConfig = {};
 (function ($) {
 

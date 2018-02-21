@@ -35,6 +35,7 @@ jQuery(function($) {
     $('.select2').select2();
 
 
+    // Delete one or more records in the database
     $('.submitbuttondel').on('click', function (e) {
 
         var form = $(this).parents('#frmDelete');
@@ -64,16 +65,59 @@ jQuery(function($) {
                         dataType: 'json',
                         data: {ids: ids},
                         success: function (data) {
-                            swal("Deleted!", data.msg, "success");
+                            swal("Deleted!", data.message, "success");
                         },
                         error: function (data) {
-                            swal("Warning!", data.responseJSON.msg, "error");
+                            swal("Warning!", data.responseJSON.message, "error");
                         }
                     });
                 }, 2000);
-            });
+            }
+        );
 
     });
+
+
+    // Delete record button "data-action"
+    $("button.remove").on('click', function(e){
+
+        var action = $(this).data("action");
+        var parent = $(this).parent();
+        var csrf = $("meta[name='csrf-token']").attr('content');
+
+        swal({
+                title: "Are you sure?",
+                text: "Do you want to delete this record?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            },
+            function(){
+                setTimeout(function() {
+                    $.ajax({
+                        type: "delete",
+                        url: action,
+                        data: '_token=' + csrf,
+                        beforeSend: function() {
+                            parent.closest("tr").animate({'backgroundColor':'#fb6c6c'},300);
+                        },
+                        success: function (data) {
+                            swal("Deleted!", data.message, "success");
+                            parent.slideUp(300,function() {
+                                parent.closest("tr").remove();
+                            });
+                        },
+                        error: function (data) {
+                            swal("Warning!", data.responseJSON.message, "error");
+                        }
+                    });
+                }, 2000);
+            }
+        );
+    })
 
 
 });
